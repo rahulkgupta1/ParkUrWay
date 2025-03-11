@@ -16,32 +16,13 @@
 
 ## 🛠️ Technology Stack
 - **Frontend:** HTML, CSS, Bootstrap
-- **Backend:** Node.js, Express
+- **Backend:** Node.js
 - **Database:** MongoDB
-- **APIs:** Google Maps API for navigation integration
+- **APIs:** Leaflet
 
 ---
 
-## 📥 Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/ParKUrWay.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd ParKUrWay
-   ```
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-4. Start the server:
-   ```bash
-   npm start
-   ```
-5. Access the project at `http://localhost:3000`
 
----
 
 ## 🚶 Usage
 1. 🔒 Sign up or log in to create a user profile.  
