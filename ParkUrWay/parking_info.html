@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Payment</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!-- OpenRouteService (Leaflet) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f8f8;
+            transition: background 0.5s, color 0.5s;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+
+        .dark-mode .container {
+            background: #222;
+            color: white;
+        }
+
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+            border: 1px solid #FF5733;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #FF5733;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s ease, transform 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background: #D84315;
+            transform: scale(1.05);
+        }
+
+        .dark-mode button {
+            background: #1E1E1E;
+            color: white;
+        }
+
+        /* Map Styling */
+        #map {
+            height: 400px;
+            width: 80%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <h2>🚗 Parking Payment</h2>
+
+    <div class="container">
+        <p><strong>📍 Location:</strong> <span id="location"></span></p>
+        <p><strong>💰 Price per Hour:</strong> ₹<span id="price"></span></p>
+        <p><strong>✅ Availability:</strong> <span id="availability"></span></p>
+
+        <!-- Map -->
+        <h3>Parking Location</h3>
+        <div id="map"></div>
+
+        <h3>Book Your Spot</h3>
+        <label>⏳ Time Slot (Hours):</label>
+        <input type="number" id="time-slot" min="1" max="24" value="1">
+        <button onclick="calculateTotal()">Calculate Total</button>
+        <p><strong>💵 Total Cost:</strong> ₹<span id="total-cost">0</span></p>
+        <button id="pay-button">Pay with Stripe</button>
+    </div>
+
+    <script>
+        const stripe = Stripe("pk_test_51Quos3BLcYzUZ4IoBlBs0P5WDpeoQriptd6euHXYE42ejXwszzFChk9UcEJvCjQHaMcquadx6qaHizGQ8JB61lyH00BYtISCK2"); // Replace with Stripe Publishable Key
+
+        // Get Data from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedLocation = urlParams.get("location");
+        document.getElementById("location").textContent = selectedLocation;
+        document.getElementById("price").textContent = urlParams.get("price");
+        document.getElementById("availability").textContent = urlParams.get("availability");
+
+        function calculateTotal() {
+            let price = parseFloat(urlParams.get("price"));
+            let hours = parseInt(document.getElementById("time-slot").value);
+            document.getElementById("total-cost").textContent = (price * hours).toFixed(2);
+        }
+
+        document.getElementById("pay-button").addEventListener("click", async () => {
+            let totalAmount = parseFloat(document.getElementById("total-cost").textContent);
+
+            const response = await fetch("http://localhost:3000/create-checkout-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    location: selectedLocation,
+                    amount: totalAmount
+                })
+            });
+
+            const session = await response.json();
+            stripe.redirectToCheckout({ sessionId: session.id });
+        });
+
+        // Define Locations with Coordinates
+        const locations = {
+            "New Delhi": [28.6139, 77.2090],
+            "Rithala": [28.7197, 77.1365],
+            "Naraina Vihar": [28.6263, 77.1439],
+            "Connaught Place": [28.6315, 77.2167],
+            "Dwaraka": [28.5846, 77.0566],
+            "Dhaula Kuan": [28.5882, 77.1717],
+            "Azadpur": [28.7120, 77.1720],
+            "Shalimar Bagh": [28.7025, 77.1683],
+            "Karol Bagh": [28.6518, 77.1925],
+            "GB Road": [28.6400, 77.2270]
+        };
+
+        // Initialize Map with OpenRouteService
+        const coordinates = locations[selectedLocation] || [28.6139, 77.2090]; // Default to New Delhi if not found
+
+        const map = L.map('map').setView(coordinates, 15);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add Marker for Selected Location
+        L.marker(coordinates).addTo(map)
+            .bindPopup(`<b>${selectedLocation}</b><br>Parking Available Here`)
+            .openPopup();
+    </script>
+
+</body>
+</html>
