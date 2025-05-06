@@ -8,7 +8,7 @@
 [![Demo](https://img.shields.io/badge/demo-live-orange)](https://parkurway.vercel.app)
 
 <p align="center">
-  <img src="https://via.placeholder.com/800x400?text=ParKUrWay+Dashboard" alt="ParKUrWay Dashboard" width="700">
+  <img src="[https://via.placeholder.com/800x400?text=ParKUrWay+Dashboard](https://rahulkgupta1.github.io/ParkUrWay.github.io/)" alt="ParKUrWay Dashboard" width="700">
 </p>
 
 ## 🌟 About
@@ -81,7 +81,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Rahul Kumar Gupta - [LinkedIn](https://www.linkedin.com/in/rahulkgupta1/) - rahulkgupta477@gmail.com
 
-Project Link: [https://github.com/yourusername/parkurway](https://github.com/yourusername/parkurway)
+Project Link: [https://github.com/yourusername/parkurway]([https://github.com/yourusername/parkurway](https://rahulkgupta1.github.io/ParkUrWay.github.io/))
 
 ---
 
