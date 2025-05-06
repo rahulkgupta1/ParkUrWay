@@ -41,17 +41,6 @@
 - 🔄 Beta Testing: **In Progress**
 - 🚀 Public Launch: **Scheduled for Q3 2025**
 
-## 📱 Screenshots
-
-<p align="center">
-  <img src="https://via.placeholder.com/250x500?text=Mobile+App" alt="Mobile App" width="200">
-  <img src="https://via.placeholder.com/250x500?text=Map+View" alt="Map View" width="200">
-  <img src="https://via.placeholder.com/250x500?text=Booking+Screen" alt="Booking Screen" width="200">
-</p>
-
-
-
-Visit `http://localhost:3000` to see the application running.
 
 ## 🔮 Roadmap
 
