@@ -51,21 +51,7 @@
   <img src="https://via.placeholder.com/250x500?text=Booking+Screen" alt="Booking Screen" width="200">
 </p>
 
-## 🚀 Getting Started
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/parkurway.git
-
-# Navigate to project directory
-cd parkurway
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-```
 
 Visit `http://localhost:3000` to see the application running.
 
@@ -93,7 +79,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-Rahul Kumar Gupta - [@twitter_handle](https://twitter.com/your_twitter) - email@example.com
+Rahul Kumar Gupta - [LinkedIn](https://www.linkedin.com/in/rahulkgupta1/) - rahulkgupta477@gmail.com
 
 Project Link: [https://github.com/yourusername/parkurway](https://github.com/yourusername/parkurway)
 
